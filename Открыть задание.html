@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Задание для закрепления. Блок 4</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: учебный лист — узкая колонка текста, широкие медиа-врезки, таймкоды видео как рабочая сетка */
+:root{
+  --paper:#f3f5f8; --sheet:#ffffff; --ink:#1b2430; --muted:#5b6778; --line:#d5dbe4;
+  --accent:#d9661c; --accent-soft:#fbe9dc; --blue:#2c5d9e; --grid:rgba(44,93,158,.07);
+  --f-body:"Golos Text",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --paper:#15191f; --sheet:#1c222a; --ink:#e6eaf0; --muted:#9aa5b5; --line:#2f3844;
+  --accent:#f08a43; --accent-soft:#3a2a1e; --blue:#7fa8e0; --grid:rgba(127,168,224,.06); color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#15191f; --sheet:#1c222a; --ink:#e6eaf0; --muted:#9aa5b5; --line:#2f3844;
+  --accent:#f08a43; --accent-soft:#3a2a1e; --blue:#7fa8e0; --grid:rgba(127,168,224,.06); color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font:400 17px/1.6 var(--f-body);
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+  background-size:24px 24px;}
+.wrap{max-width:980px;margin:0 auto;padding-block:32px 64px;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+header{display:grid;gap:20px;margin-bottom:28px}
+.eyebrow{font:600 13px/1 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+h1{font-weight:700;font-size:clamp(28px,4.6vw,44px);line-height:1.15;margin:0;text-wrap:balance}
+.lead{color:var(--muted);max-width:65ch;margin:0}
+.meta{display:flex;flex-wrap:wrap;gap:8px}
+.chip{font:500 13px/1 var(--f-mono);padding:7px 10px;border:1px solid var(--line);border-radius:4px;background:var(--sheet);color:var(--muted)}
+.cover{border-radius:6px;border:1px solid var(--line);display:block;width:100%}
+nav.toc{background:var(--sheet);border:1px solid var(--line);border-radius:6px;padding:18px 20px;margin:28px 0 8px}
+nav.toc h2{margin:0 0 10px;font-size:15px;font-family:var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+nav.toc ol{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:4px 24px}
+nav.toc a{display:flex;gap:12px;color:var(--ink);text-decoration:none;padding:4px 0}
+nav.toc a:hover span:last-child{color:var(--accent)}
+.tc{font:500 13px/1.9 var(--f-mono);color:var(--blue);font-variant-numeric:tabular-nums;min-width:44px}
+section{padding-top:40px}
+section h2{display:flex;align-items:baseline;gap:14px;font-size:clamp(22px,3vw,28px);line-height:1.25;margin:0 0 14px;text-wrap:balance}
+section h2 .tc{font-size:14px;flex:none}
+p,ul,ol.steps{max-width:68ch}
+ul{padding-left:1.2em}
+li{margin:4px 0}
+b{font-weight:600}
+kbd{font:500 .85em var(--f-mono);border:1px solid var(--line);border-bottom-width:2px;border-radius:4px;padding:1px 6px;background:var(--sheet)}
+.ui{font-weight:600;color:var(--blue)}
+figure{margin:20px 0;display:grid;gap:8px}
+figure img{width:100%;border-radius:6px;border:1px solid var(--line);background:#222}
+figcaption{font-size:14px;color:var(--muted);display:flex;gap:10px;flex-wrap:wrap}
+figcaption .tag{font:600 11px/1.6 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--accent);background:var(--accent-soft);padding:0 6px;border-radius:3px}
+.tip{border-left:3px solid var(--accent);background:var(--sheet);padding:12px 16px;border-radius:0 6px 6px 0;max-width:68ch;margin:16px 0}
+.tip strong{color:var(--accent)}
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:6px;background:var(--sheet);margin:16px 0}
+table{border-collapse:collapse;width:100%;min-width:560px;font-size:15px}
+th,td{text-align:left;vertical-align:top;padding:10px 14px;border-bottom:1px solid var(--line)}
+th{font:600 12px var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+tr:last-child td{border-bottom:0}
+td:first-child{white-space:nowrap;font-weight:600}
+td.tc{white-space:nowrap}
+.status{display:flex;flex-wrap:wrap;gap:4px;margin:12px 0}
+.status span{font:500 12px/1 var(--f-mono);padding:6px 8px;background:#2b3138;color:#cfd6df;border-radius:3px}
+.status span.on{background:#3a5f94;color:#fff}
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.two figure{margin:0}
+footer{margin-top:56px;padding-top:20px;border-top:1px solid var(--line);color:var(--muted);font-size:14px}
+footer ul{padding-left:1.2em}
+a{color:var(--blue)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+
+.sec{font-size:clamp(22px,3vw,28px);margin:48px 0 8px;padding-top:12px;border-top:2px solid var(--line)}
+.les{display:flex;gap:10px;align-items:baseline;font-size:19px;margin:28px 0 12px}
+.les .num{font:600 14px/1 var(--f-mono);color:var(--accent)}
+.q{background:var(--sheet);border:1px solid var(--line);border-radius:10px;padding:18px 20px;margin:0 0 14px}
+.q.good{border-color:#3d9a5b;box-shadow:inset 4px 0 0 #3d9a5b}
+.q.bad{border-color:#c4533a;box-shadow:inset 4px 0 0 #c4533a}
+.qh{display:flex;gap:10px;align-items:center;margin-bottom:6px}
+.qn{font:600 13px/1 var(--f-mono);background:var(--accent-soft);color:var(--accent);padding:5px 8px;border-radius:6px}
+.qt{font:500 12px/1 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.qq{margin:6px 0 12px;font-weight:500}
+.q figure{margin:0 0 12px}.q img{max-width:100%;height:auto;border:1px solid var(--line);border-radius:6px;display:block}
+.pics{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.pics figcaption{font-size:14px;color:var(--muted);margin-top:4px}
+.opts{display:grid;gap:6px}
+.opt{display:flex;gap:10px;align-items:flex-start;padding:8px 10px;border:1px solid var(--line);border-radius:8px;cursor:pointer}
+.opt:hover{border-color:var(--blue)}
+.opt input{margin-top:5px}
+.let{font:600 13px/1.9 var(--f-mono);color:var(--blue);min-width:1.2em}
+.right{list-style:none;padding:0;margin:0 0 10px;display:grid;gap:4px}
+.right li{display:flex;gap:10px}
+.pairs{display:grid;gap:6px}
+.pair{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center;padding:6px 10px;border:1px dashed var(--line);border-radius:8px}
+.ln{font:600 13px/1 var(--f-mono);color:var(--accent)}
+select,.wr{font:inherit;color:var(--ink);background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:6px 10px}
+.wr{width:100%;max-width:420px}
+.fb{margin:10px 0 0;font-size:15px}
+.q.good .fb{color:#3d9a5b}.q.bad .fb{color:#c4533a}
+.bar{position:sticky;bottom:0;display:flex;flex-wrap:wrap;gap:12px;align-items:center;background:var(--sheet);border:1px solid var(--line);border-radius:10px;padding:12px 16px;margin-top:24px}
+button{font:600 15px/1 var(--f-body);background:var(--accent);color:#fff;border:0;border-radius:8px;padding:11px 18px;cursor:pointer}
+button.ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
+#score{font:600 15px/1 var(--f-mono)}
+</style></head><body><div class="wrap">
+<header><div class="eyebrow">Блок 4 · Задание для закрепления</div><h1>Проверьте себя по четвёртому блоку</h1>
+<p class="lead">По три задания на каждый урок: тесты, сопоставления и вопросы, где нужно вписать название команды. Программа не нужна. Выполните задание и нажмите «Проверить» — верные ответы подсветятся.</p>
+<div class="meta"><span class="chip">18 заданий</span><span class="chip">6 уроков</span><span class="chip">2 раздела</span></div></header>
+<nav class="toc"><h2>Разделы</h2><ol><li><a href="#r0">Блоки nanoCAD</a></li><li><a href="#r1">Работа с таблицами</a></li></ol></nav>
+<section id="r0"><h2 class="sec">Раздел 1. Блоки nanoCAD</h2>
+<h3 class="les"><span class="num">1.1</span>Создание блоков</h3>
+<article class="q" data-n="1"><div class="qh"><span class="qn">1</span><span class="qt">Тест</span></div><p class="qq">Что такое базовая точка блока?</p>
+<div class="opts"><label class="opt"><input type="radio" name="q1" value="0"><span class="let">а</span><span>Первая точка, которую начертили в блоке</span></label><label class="opt"><input type="radio" name="q1" value="1"><span class="let">б</span><span>Точка, за которую блок вставляется в чертёж</span></label><label class="opt"><input type="radio" name="q1" value="2"><span class="let">в</span><span>Центр листа</span></label><label class="opt"><input type="radio" name="q1" value="3"><span class="let">г</span><span>Точка начала координат модели</span></label></div>
+<p class="fb" hidden></p></article>
+<article class="q" data-n="2"><div class="qh"><span class="qn">2</span><span class="qt">Сопоставление</span></div><p class="qq">Сопоставьте вариант для исходных объектов и результат.</p>
+<ol class="right"><li><span class="let">А</span>На месте объектов сразу появляется вставка блока</li><li><span class="let">Б</span>Исходные объекты убираются с чертежа</li><li><span class="let">В</span>Объекты остаются отдельными примитивами</li></ol>
+<div class="pairs"><label class="pair"><span class="ln">1</span><span class="lt">Оставить</span><select name="q2_0"><option value="">—</option><option value="0">А</option><option value="1">Б</option><option value="2">В</option></select></label><label class="pair"><span class="ln">2</span><span class="lt">Преобразовать в блок</span><select name="q2_1"><option value="">—</option><option value="0">А</option><option value="1">Б</option><option value="2">В</option></select></label><label class="pair"><span class="ln">3</span><span class="lt">Удалить</span><select name="q2_2"><option value="">—</option><option value="0">А</option><option value="1">Б</option><option value="2">В</option></select></label></div>
+<p class="fb" hidden></p></article>
+<article class="q" data-n="3"><div class="qh"><span class="qn">3</span><span class="qt">Тест</span></div><p class="qq">Как автор советует создавать блок?</p>
+<div class="opts"><label class="opt"><input type="radio" name="q3" value="0"><span class="let">а</span><span>Сначала начертить объекты, затем превратить их в блок</span></label><label class="opt"><input type="radio" name="q3" value="1"><span class="let">б</span><span>Создать пустой блок и наполнять его в редакторе</span></label><label class="opt"><input type="radio" name="q3" value="2"><span class="let">в</span><span>Импортировать блок из интернета</span></label><label class="opt"><input type="radio" name="q3" value="3"><span class="let">г</span><span>Начертить объекты прямо в окне «Определение блока»</span></label></div>
+<p class="fb" hidden></p></article>
+<h3 class="les"><span class="num">1.2</span>Вставка блоков</h3>
+<article class="q" data-n="4"><div class="qh"><span class="qn">4</span><span class="qt">Тест</span></div><p class="qq">Какой флажок в этом окне нужно включить, чтобы блок вставился как набор отдельных объектов?</p>
+<figure><img src="Изображения/01 Окно Вставка блока.jpg" alt="Иллюстрация к заданию 4" loading="lazy"></figure>
+<div class="opts"><label class="opt"><input type="radio" name="q4" value="0"><span class="let">а</span><span>Указать на экране</span></label><label class="opt"><input type="radio" name="q4" value="1"><span class="let">б</span><span>Равные масштабы</span></label><label class="opt"><input type="radio" name="q4" value="2"><span class="let">в</span><span>Разбить</span></label><label class="opt"><input type="radio" name="q4" value="3"><span class="let">г</span><span>Единицы блока</span></label></div>
+<p class="fb" hidden></p></article>
+<article class="q" data-n="5"><div class="qh"><span class="qn">5</span><span class="qt">Впишите ответ</span></div><p class="qq">На какой вкладке ленты находится команда «Вставка блока»?</p>
+<input class="wr" type="text" name="q5" autocomplete="off" placeholder="Ваш ответ">
+<p class="fb" hidden></p></article>
+<article class="q" data-n="6"><div class="qh"><span class="qn">6</span><span class="qt">Тест</span></div><p class="qq">Когда удобно вставлять блок сразу разбитым?</p>
+<div class="opts"><label class="opt"><input type="radio" name="q6" value="0"><span class="let">а</span><span>Когда блок нужно поскорее удалить</span></label><label class="opt"><input type="radio" name="q6" value="1"><span class="let">б</span><span>Когда блок служит заготовкой, которую потом дорабатывают</span></label><label class="opt"><input type="radio" name="q6" value="2"><span class="let">в</span><span>Когда блок вставляется в другой чертёж</span></label><label class="opt"><input type="radio" name="q6" value="3"><span class="let">г</span><span>Разбивать блок при вставке нельзя</span></label></div>
+<p class="fb" hidden></p></article>
+<h3 class="les"><span class="num">1.3</span>Редактирование блоков</h3>
+<article class="q" data-n="7"><div class="qh"><span class="qn">7</span><span class="qt">Тест</span></div><p class="qq">Что будет, если выйти из редактора блоков без сохранения?</p>
+<div class="opts"><label class="opt"><input type="radio" name="q7" value="0"><span class="let">а</span><span>Изменения применятся автоматически</span></label><label class="opt"><input type="radio" name="q7" value="1"><span class="let">б</span><span>Изменения не попадут во вставки блока на чертеже</span></label><label class="opt"><input type="radio" name="q7" value="2"><span class="let">в</span><span>Блок удалится из чертежа</span></label><label class="opt"><input type="radio" name="q7" value="3"><span class="let">г</span><span>Чертёж закроется</span></label></div>
+<p class="fb" hidden></p></article>
+<article class="q" data-n="8"><div class="qh"><span class="qn">8</span><span class="qt">Впишите ответ</span></div><p class="qq">Как называется текстовое поле блока, значение которого задаётся при каждой вставке?</p>
+<input class="wr" type="text" name="q8" autocomplete="off" placeholder="Ваш ответ">
+<p class="fb" hidden></p></article>
+<article class="q" data-n="9"><div class="qh"><span class="qn">9</span><span class="qt">Тест</span></div><p class="qq">На рисунке блоки, у каждой вставки своя подпись. Для чего обычно применяют такие блоки?</p>
+<figure><img src="Изображения/02 Блоки с подписью.jpg" alt="Иллюстрация к заданию 9" loading="lazy"></figure>
+<div class="opts"><label class="opt"><input type="radio" name="q9" value="0"><span class="let">а</span><span>Для маркировок и высотных отметок</span></label><label class="opt"><input type="radio" name="q9" value="1"><span class="let">б</span><span>Для штриховки</span></label><label class="opt"><input type="radio" name="q9" value="2"><span class="let">в</span><span>Для настройки печати</span></label><label class="opt"><input type="radio" name="q9" value="3"><span class="let">г</span><span>Для создания слоёв</span></label></div>
+<p class="fb" hidden></p></article>
+</section>
+<section id="r1"><h2 class="sec">Раздел 2. Работа с таблицами</h2>
+<h3 class="les"><span class="num">2.1</span>Создание таблиц</h3>
+<article class="q" data-n="10"><div class="qh"><span class="qn">10</span><span class="qt">Сопоставление</span></div><p class="qq">Сопоставьте вид таблицы и его особенность.</p>
+<ol class="right"><li><span class="let">А</span>Строится по стилю таблицы и понятна другим программам</li><li><span class="let">Б</span>Сама подстраивается под масштаб чертежа; бывает нестандартной, из базы или из файла</li></ol>
+<div class="pairs"><label class="pair"><span class="ln">1</span><span class="lt">Таблица nanoCAD</span><select name="q10_0"><option value="">—</option><option value="0">А</option><option value="1">Б</option></select></label><label class="pair"><span class="ln">2</span><span class="lt">Таблица DWG</span><select name="q10_1"><option value="">—</option><option value="0">А</option><option value="1">Б</option></select></label></div>
+<p class="fb" hidden></p></article>
+<article class="q" data-n="11"><div class="qh"><span class="qn">11</span><span class="qt">Тест</span></div><p class="qq">Почему стандартный стиль таблицы лучше скопировать и настраивать копию?</p>
+<div class="opts"><label class="opt"><input type="radio" name="q11" value="0"><span class="let">а</span><span>Стандартный стиль нельзя открыть</span></label><label class="opt"><input type="radio" name="q11" value="1"><span class="let">б</span><span>Так исходный стиль останется нетронутым</span></label><label class="opt"><input type="radio" name="q11" value="2"><span class="let">в</span><span>Копия печатается лучше</span></label><label class="opt"><input type="radio" name="q11" value="3"><span class="let">г</span><span>Иначе таблица не вставится</span></label></div>
+<p class="fb" hidden></p></article>
+<article class="q" data-n="12"><div class="qh"><span class="qn">12</span><span class="qt">Впишите ответ</span></div><p class="qq">На какой вкладке ленты, кроме «Главной», есть команды создания таблиц?</p>
+<input class="wr" type="text" name="q12" autocomplete="off" placeholder="Ваш ответ">
+<p class="fb" hidden></p></article>
+<h3 class="les"><span class="num">2.2</span>Редактирование таблиц</h3>
+<article class="q" data-n="13"><div class="qh"><span class="qn">13</span><span class="qt">Тест</span></div><p class="qq">Как открыть редактор таблицы nanoCAD, если не делать двойной щелчок?</p>
+<div class="opts"><label class="opt"><input type="radio" name="q13" value="0"><span class="let">а</span><span>Выделить таблицу, щёлкнуть правой кнопкой мыши и выбрать «Редактировать»</span></label><label class="opt"><input type="radio" name="q13" value="1"><span class="let">б</span><span>Нажать F1</span></label><label class="opt"><input type="radio" name="q13" value="2"><span class="let">в</span><span>Открыть окно «Слои»</span></label><label class="opt"><input type="radio" name="q13" value="3"><span class="let">г</span><span>Никак — только двойным щелчком</span></label></div>
+<p class="fb" hidden></p></article>
+<article class="q" data-n="14"><div class="qh"><span class="qn">14</span><span class="qt">Тест</span></div><p class="qq">Что можно сделать маркерами выделенной таблицы, как на рисунке?</p>
+<figure><img src="Изображения/03 Выделенная таблица.jpg" alt="Иллюстрация к заданию 14" loading="lazy"></figure>
+<div class="opts"><label class="opt"><input type="radio" name="q14" value="0"><span class="let">а</span><span>Изменить высоту строк, ширину столбцов и точку привязки</span></label><label class="opt"><input type="radio" name="q14" value="1"><span class="let">б</span><span>Изменить шрифт</span></label><label class="opt"><input type="radio" name="q14" value="2"><span class="let">в</span><span>Залить ячейки цветом</span></label><label class="opt"><input type="radio" name="q14" value="3"><span class="let">г</span><span>Удалить таблицу</span></label></div>
+<p class="fb" hidden></p></article>
+<article class="q" data-n="15"><div class="qh"><span class="qn">15</span><span class="qt">Впишите ответ</span></div><p class="qq">Как называются маркеры на выделенном объекте, которыми меняют его размеры и положение?</p>
+<input class="wr" type="text" name="q15" autocomplete="off" placeholder="Ваш ответ">
+<p class="fb" hidden></p></article>
+<h3 class="les"><span class="num">2.3</span>Шаблоны чертежей</h3>
+<article class="q" data-n="16"><div class="qh"><span class="qn">16</span><span class="qt">Тест</span></div><p class="qq">Какой шаблон открывается в nanoCAD по умолчанию?</p>
+<div class="opts"><label class="opt"><input type="radio" name="q16" value="0"><span class="let">а</span><span>Default</span></label><label class="opt"><input type="radio" name="q16" value="1"><span class="let">б</span><span>СПДС</span></label><label class="opt"><input type="radio" name="q16" value="2"><span class="let">в</span><span>ЕСКД</span></label><label class="opt"><input type="radio" name="q16" value="3"><span class="let">г</span><span>Пустой лист</span></label></div>
+<p class="fb" hidden></p></article>
+<article class="q" data-n="17"><div class="qh"><span class="qn">17</span><span class="qt">Тест</span></div><p class="qq">Какие шаблоны из этого списка подходят для строительных чертежей?</p>
+<figure><img src="Изображения/04 Список шаблонов.jpg" alt="Иллюстрация к заданию 17" loading="lazy"></figure>
+<div class="opts"><label class="opt"><input type="radio" name="q17" value="0"><span class="let">а</span><span>Шаблоны с SPDS в имени</span></label><label class="opt"><input type="radio" name="q17" value="1"><span class="let">б</span><span>Шаблоны с ESKD в имени</span></label><label class="opt"><input type="radio" name="q17" value="2"><span class="let">в</span><span>Шаблон 3D</span></label><label class="opt"><input type="radio" name="q17" value="3"><span class="let">г</span><span>Любые — они одинаковые</span></label></div>
+<p class="fb" hidden></p></article>
+<article class="q" data-n="18"><div class="qh"><span class="qn">18</span><span class="qt">Впишите ответ</span></div><p class="qq">Какое расширение у файлов шаблонов чертежей?</p>
+<input class="wr" type="text" name="q18" autocomplete="off" placeholder="Ваш ответ">
+<p class="fb" hidden></p></article>
+</section>
+<div class="bar"><button id="check" type="button">Проверить</button><button id="reset" type="button" class="ghost">Начать заново</button><span id="score" aria-live="polite"></span></div>
+</div><script>
+const KEY={"1":{"t":"c","a":1,"show":"б) Точка, за которую блок вставляется в чертёж"},"2":{"t":"m","a":[2,0,1],"show":"1 — В, 2 — А, 3 — Б"},"3":{"t":"c","a":0,"show":"а) Сначала начертить объекты, затем превратить их в блок"},"4":{"t":"c","a":2,"show":"в) Разбить"},"5":{"t":"w","a":["Главная","главная","вкладка главная"],"show":"Главная"},"6":{"t":"c","a":1,"show":"б) Когда блок служит заготовкой, которую потом дорабатывают"},"7":{"t":"c","a":1,"show":"б) Изменения не попадут во вставки блока на чертеже"},"8":{"t":"w","a":["атрибут","атрибут блока","атрибуты"],"show":"Атрибут"},"9":{"t":"c","a":0,"show":"а) Для маркировок и высотных отметок"},"10":{"t":"m","a":[1,0],"show":"1 — Б, 2 — А"},"11":{"t":"c","a":1,"show":"б) Так исходный стиль останется нетронутым"},"12":{"t":"w","a":["Оформление","оформление","вкладка оформление"],"show":"Оформление"},"13":{"t":"c","a":0,"show":"а) Выделить таблицу, щёлкнуть правой кнопкой мыши и выбрать «Редактировать»"},"14":{"t":"c","a":0,"show":"а) Изменить высоту строк, ширину столбцов и точку привязки"},"15":{"t":"w","a":["ручки","ручка","маркеры"],"show":"Ручки"},"16":{"t":"c","a":0,"show":"а) Default"},"17":{"t":"c","a":0,"show":"а) Шаблоны с SPDS в имени"},"18":{"t":"w","a":["dwt",".dwt"],"show":".dwt"}};
+const norm=s=>s.toLowerCase().replace(/ё/g,'е').replace(/[«»"'.]/g,'').replace(/[\s+\-]+/g,'');
+document.getElementById('check').onclick=()=>{let ok=0,tot=0;
+ document.querySelectorAll('.q').forEach(q=>{const n=q.dataset.n,k=KEY[n];tot++;let good=false,empty=false;
+  if(k.t==='c'){const v=q.querySelector('input:checked');empty=!v;good=v&&+v.value===k.a;}
+  else if(k.t==='w'){const v=q.querySelector('.wr').value;empty=!v.trim();good=k.a.some(a=>norm(a)===norm(v));}
+  else{const s=[...q.querySelectorAll('select')];empty=s.some(x=>x.value==='');good=s.every((x,i)=>x.value!==''&&+x.value===k.a[i]);}
+  q.classList.remove('good','bad');q.classList.add(good?'good':'bad');if(good)ok++;
+  const fb=q.querySelector('.fb');fb.hidden=false;fb.textContent=good?'Верно.':(empty?'Нет ответа. ':'Неверно. ')+(good?'':'Правильный ответ: '+k.show);});
+ document.getElementById('score').textContent='Верно: '+ok+' из '+tot;};
+document.getElementById('reset').onclick=()=>{document.querySelectorAll('input[type=radio]').forEach(x=>x.checked=false);
+ document.querySelectorAll('.wr').forEach(x=>x.value='');document.querySelectorAll('select').forEach(x=>x.value='');
+ document.querySelectorAll('.q').forEach(q=>{q.classList.remove('good','bad');q.querySelector('.fb').hidden=true});document.getElementById('score').textContent='';window.scrollTo(0,0)};
+</script></body></html>
